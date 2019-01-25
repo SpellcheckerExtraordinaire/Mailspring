@@ -13,7 +13,16 @@ const ScopedFromField = ListensToFluxStore(AccountContactField, {
   getStateFromStores: props => {
     const savedOrReplyToThread = !!props.draft.threadId;
     if (savedOrReplyToThread) {
-      return { accounts: [AccountStore.accountForId(props.draft.accountId)] };
+      // make account of thread the first choice, but still enable selecting all accounts
+      var account = AccountStore.accountForId(props.draft.accountId);
+      var allAccounts = AccountStore.accounts();
+      var index = allAccounts.indexOf(account);
+      if (index > -1) {
+        allAccounts.splice(index, 1);
+      }
+      allAccounts.unshift(account);
+
+      return { accounts: allAccounts };
     }
     return { accounts: AccountStore.accounts() };
   },
