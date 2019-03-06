@@ -1,5 +1,74 @@
 # Mailspring Changelog
 
+### 1.6.0 (TBD)
+
+Development:
+
+**Mailspring now uses the TypeScript compiler instead of Babel, and the entire project (92,000 LOC!) has been converted to TypeScript. 🎉** This took an enormous amount of effort - 9,800 TypeScript errors were resolved by hand - but will make the project more stable, easier to maintain, and easier to contribute to in the future.
+
+### 1.5.7 (2/25/2019)
+
+Fixes:
+
+* Emails in Gmail accounts no longer "flicker" in the thread list occasionally if you mark them as read and archive them in quick succession.
+
+* Duplicate sent emails (your copy + the recipient's copy) no longer appear in Gmail when open/link tracking are enabled. Gmail IMAP changed handling of IMAP Delete + Expunge in Sent Mail earlier this month causing this bug. This also resolves issues where viewing a message you sent would trigger read receipts. #1279 #1086 #937 #1162 #1049
+
+* Mailspring no longer erases all your account passwords when signing out of your Mailspring ID on macOS due to a race condition.
+
+* Cut/copy/paste and undo/redo now work in the "Create a Mailspring ID" and "Upgrade to Pro" webviews within the app. #15219
+
+* Mailspring now requests the "internal / received" date of emails to handle providers (including home.pl) which do not return message dates when asked for mailbox headers. This fixes an important issue where all emails could appear to be from 1969.
+
+* Mailspring now renders inline images attachments within the body of the email even if they're missing an "inline" content-disposition. Previously these images would appear as attachments at the bottom of the message.
+
+* Mailspring now supports home.pl accounts which advertised support for the IMAP XLIST extension but did not appear to implement it properly.
+
+* The contact sidebar now opens LinkedIn person profiles correctly - the "/in/" segment of the URL was previously missing.
+
+* The signature editor now allows you to add a link to your LinkedIn profile.
+
+* Mailspring shows the "Snoozed" folder name correctly in cases where it's called "Mailspring.Snoozed".
+
+* Mailspring is now less aggressive about wrapping wide emails and prefers horizontal scrolling
+  for large tables, etc.
+
+* French translations have been improved (thanks to @Gaspacchio!)
+
+Performance:
+
+* Mailspring now uses DOM ResizeObservers to implement scroll bars and properly size emails as they render which is a huge performance win, especially on slower machines.
+
+* Mailspring refreshes the data backing the conversation view asynchronously when threads are removed, eliminating jank that was especially noticable if you'd scrolled down in the list and were viewing a unified mailbox.
+
+Development:
+
+* Mailspring now uses Electron 4.0.5.
+
+### 1.5.6 (2/8/2019)
+
+Features:
+
+* Mailspring now generates quick attachment previews of common "code" file types using Prism, including .html, .json, .txt, .log.
+
+* Italian, Japanese and French translations have been improved (Thanks to @kometchtech, @ecavicc and @gooodmorningopenstack!)
+
+Fixes:
+
+* Mailspring now configures Yandex email accounts on custom domains correctly. #1337
+
+* Emails that use `<style>` tags and `class` attributes without any inline styles are now rendered correctly.
+
+* Selecting several lines of pasted text and enabling "Code Block" formatting now works correctly. #1346
+
+* Maispring now plays the "New Mail" sound correctly even if you haven't interacted with the window since the app was launched. (This was broken due to a recent new feature in Chromium blocking web pages from playing audio.)
+
+Development:
+
+* Mailspring now uses Electron 4.0.4 which fixes several memory leaks.
+
+* A preview of Mailspring's upcoming Calendar feature is available under the Developer menu. Right now, it only supports Google Calendar and the data shown on the calendar is read-only. Stay tuned! The UI was originally developed for Nylas Mail before it was shuttered and we'll be re-launching it this summer.
+
 ### 1.5.5 (1/3/2019)
 
 Features:
