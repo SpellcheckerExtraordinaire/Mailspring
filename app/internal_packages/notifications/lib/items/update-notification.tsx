@@ -55,6 +55,7 @@ export default class UpdateNotification extends React.Component<{}, UpdateNotifi
       return <span />;
     }
     return (
+      /*
       <Notification
         priority="4"
         title={localized(
@@ -71,6 +72,8 @@ export default class UpdateNotification extends React.Component<{}, UpdateNotifi
           },
         ]}
       />
+      */
+      <span />
     );
   }
 }
